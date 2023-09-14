@@ -5,11 +5,16 @@ import React, { useEffect } from "react";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 
 const Board = () => {
-  const board = useBoardStore((state) => state.getBoard);
+  const [board, getBoard] = useBoardStore((state) => [
+    state.board,
+    state.getBoard,
+  ]);
 
   useEffect(() => {
-    board();
-  }, [board]);
+    getBoard();
+  }, [getBoard]);
+
+  console.log(board);
 
   return (
     <>

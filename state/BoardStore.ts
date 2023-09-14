@@ -1,4 +1,4 @@
-import { getTodoListGroupedByColumn } from '@/libs/GetTodosGroupedByAsync'
+import { getTodoListGroupedByColumn } from '@/libs/ListTodosByAsync'
 import { create } from 'zustand'
 
 export const useBoardStore = create<IBoardState>((set) => ({
@@ -6,7 +6,7 @@ export const useBoardStore = create<IBoardState>((set) => ({
         columns: new Map<StatusKey, Column>(),
     },
     getBoard: async () => {
-        const data = await getTodoListGroupedByColumn();
-        set({data})
+        const board = await getTodoListGroupedByColumn();
+        set({ board })
     },
 }))
