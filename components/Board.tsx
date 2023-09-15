@@ -2,7 +2,12 @@
 
 import { useBoardStore } from "@/state/BoardStore";
 import React, { useEffect } from "react";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import {
+  DragDropContext,
+  Draggable,
+  DropResult,
+  Droppable,
+} from "react-beautiful-dnd";
 
 const Board = () => {
   const [board, getBoard] = useBoardStore((state) => [
@@ -14,17 +19,16 @@ const Board = () => {
     getBoard();
   }, [getBoard]);
 
-  console.log(board);
+  const handleDragComponent = (event: DropResult) => {};
 
   return (
-    <>
-      <h2>Hello Board Component</h2>
-    </>
-    // <DragDropContext>
-    //   <Droppable droppableId="board" direction="horizontal" type="column">
-
-    //   </Droppable>
-    // </DragDropContext>
+    <DragDropContext onDragEnd={handleDragComponent}>
+      <Droppable droppableId="board" direction="horizontal" type="column">
+        {(provided) => (
+          <div {...provided.droppableProps} ref={provided.innerRef}></div>
+        )}
+      </Droppable>
+    </DragDropContext>
   );
 };
 
